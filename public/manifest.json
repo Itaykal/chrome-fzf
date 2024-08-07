@@ -1,0 +1,26 @@
+{
+  "short_name": "FZF Chrome Tabs",
+  "name": "Fuzzy Find for Chrome Tabs",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Open the popup"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0",
+        "mac": "Command+Shift+0"
+      }
+    }
+  },
+  "icons": {
+    "16": "logo192.png",
+    "48": "logo192.png",
+    "128": "logo192.png"
+  }
+}
