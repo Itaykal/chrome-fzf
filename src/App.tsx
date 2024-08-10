@@ -20,7 +20,6 @@ const HighlightChars = (props: { str: string; indices: Set<number> }) => {
       return char;
     }
   });
-
   return <>{nodes}</>;
 };
 
@@ -54,8 +53,9 @@ function App() {
       <List loading={loadingState ? false : loadingState}>
         {foundTabs?.map((tab) => {
           if (tab.item.id && tab.item.title) {
+            const tabId = tab.item.id
             return (
-              <List.Item id={tab.item.id.toLocaleString()}>
+              <List.Item id={tabId.toLocaleString()} onClick={() => {chrome.tabs.update(tabId, {active: true})}}>
                 <List.Item.Meta
                   title={<HighlightChars str={tab.item.title.normalize()} indices={tab.positions}></HighlightChars>}
                   avatar={<Avatar src={tab.item.favIconUrl}></Avatar>}
