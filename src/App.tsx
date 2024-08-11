@@ -6,12 +6,11 @@ import { Avatar, Input, List, Typography } from "antd";
 
 interface Tab extends chrome.tabs.Tab {}
 
-//TODO: Implement Cursor
-//TODO: Focus Search Bar
 //TODO: non-poc code structure
 //TODO: Sticky searchbar
 //TODO: limit lines in list items
 //TODO: Dark style please :)
+//TODO: case-insensetivity
 
 async function fetchTabs(): Promise<Tab[]> {
   return await chrome.tabs.query({});
@@ -46,7 +45,7 @@ function App() {
           setCursor(prevCursor => Math.max(prevCursor - 1, 0));
           break;
         case "ArrowDown":
-          setCursor(prevCursor => Math.min(prevCursor + 1, data?.length ? data.length : 0))
+          setCursor(prevCursor => Math.min(prevCursor + 1, foundTabs?.length ? foundTabs.length - 1 : 0))
           break;
         case "Enter":
           const listItems = listRef.current?.querySelectorAll('.ant-list-item');
