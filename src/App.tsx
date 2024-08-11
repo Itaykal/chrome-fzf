@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useAsync } from "react-async";
 import { Fzf, FzfResultItem } from "fzf";
 import { Avatar, Input, List, Typography } from "antd";
@@ -31,6 +31,8 @@ const HighlightChars = (props: { str: string; indices: Set<number> }) => {
 };
 
 function App() {
+  const listRef = useRef<HTMLDivElement>(null);
+
   const [loadingState, setLoadingState] = useState<Boolean>(false);
   const [cursor, setCursor] = useState<number>(0);
   const [foundTabs, setFoundTabs] = useState<FzfResultItem<Tab>[]>();
@@ -46,6 +48,12 @@ function App() {
         case "ArrowDown":
           setCursor(prevCursor => Math.min(prevCursor + 1, data?.length ? data.length : 0))
           break;
+        case "Enter":
+          const listItems = listRef.current?.querySelectorAll('.ant-list-item');
+          if (listItems && listItems[cursor]) {
+            (listItems[cursor] as HTMLElement).click()
+          }
+          break;
         default:
           break;
       }
@@ -56,8 +64,9 @@ function App() {
   });
 
   return (
-    <div className="App" onKeyDown={handleCursorMovement}>
+    <div className="App" ref={listRef} onKeyDown={handleCursorMovement}>
       <Input.Search
+        autoFocus
         loading={loadingState ? false : loadingState}
         onChange={(e) => {
           const value = e.target.value;
