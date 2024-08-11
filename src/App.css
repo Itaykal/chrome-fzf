@@ -41,8 +41,3 @@
   width: 100%;
   height: 10%;
 }
-
-.ant-list-item:hover {
-  box-shadow: 0 0 4px #9e9e9e;
-  transition: all 0.1s ease-in;
-}
